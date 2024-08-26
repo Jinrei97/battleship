@@ -3,7 +3,12 @@ const HTMLWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: {
-    app: "./src/index.js",
+    app: [
+      "./src/gameBoard.js",
+      "./src/ship.js",
+      "./src/player.js",
+      "./src/game.js",
+    ],
   },
   output: {
     filename: "[name].bundle.js",
