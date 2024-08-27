@@ -7,6 +7,7 @@ module.exports = {
       "./src/gameBoard.js",
       "./src/ship.js",
       "./src/player.js",
+      "./src/DOMController.js",
       "./src/game.js",
     ],
   },
