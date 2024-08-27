@@ -7,6 +7,11 @@ class GameBoard {
     this.ships = [];
     this.history = [];
   }
+  resetBoard = () => {
+    this.board = this.setupBoard();
+    this.ships = [];
+    this.history = [];
+  };
   setupBoard = (size = 10) => {
     const board = [];
     for (let i = 0; i < size; i++) {
@@ -36,10 +41,15 @@ class GameBoard {
       if (area.ship) {
         area.hit = true;
         area.ship.hit();
+        this.checkVictory();
       } else {
         this.history.push(position);
       }
     }
+  };
+  checkVictory = () => {
+    const totHp = this.ships.reduce((tot, ship) => (tot += ship.hp), 0);
+    return totHp > 0 ? false : true;
   };
 }
 

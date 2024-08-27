@@ -2,7 +2,9 @@ const GameBoard = require("../gameBoard");
 const Ship = require("../ship");
 
 const gameBoard = new GameBoard();
-//afterEach(() => (gameBoard.board = gameBoard.setupBoard()));
+afterEach(() => {
+  gameBoard.resetBoard();
+});
 
 it("boardSize", () => {
   expect([gameBoard.board.length, gameBoard.board[0].length]).toEqual([10, 10]);
@@ -28,11 +30,24 @@ it("attackMiss", () => {
   expect(gameBoard.board[0][0].hit).toBe(false);
 });
 it("attackHit", () => {
+  const ship = new Ship(3);
+  gameBoard.placeShip(ship, [3, 4], [1, 0]);
   gameBoard.receiveAttack([3, 4]);
   expect(gameBoard.board[3][4].hit).toBe(true);
 });
 it("history", () => {
-  expect(gameBoard.history.length).toBe(1);
+  expect(gameBoard.history.length).toBe(0);
   gameBoard.receiveAttack([8, 7]);
-  expect(gameBoard.history.length).toEqual(2);
+  expect(gameBoard.history.length).toEqual(1);
+});
+
+it("victory check", () => {
+  const ship = new Ship(3);
+  gameBoard.placeShip(ship, [3, 4], [1, 0]);
+  expect(gameBoard.ships[0].hp).toBe(3);
+  expect(gameBoard.checkVictory()).toBe(false);
+  gameBoard.receiveAttack([3, 4]);
+  gameBoard.receiveAttack([4, 4]);
+  gameBoard.receiveAttack([5, 4]);
+  expect(gameBoard.checkVictory()).toBe(true);
 });
