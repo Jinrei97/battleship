@@ -1,19 +1,32 @@
 //import { Ship } from "./ship";
+const Ship = require("./ship");
 
 class GameBoard {
   constructor() {
     this.board = this.setupBoard();
+    this.ships = [];
   }
   setupBoard = (size = 10) => {
     const board = [];
     for (let i = 0; i < size; i++) {
       const row = [];
       for (let j = 0; j < size; j++) {
-        row.push(0);
+        row.push({ hit: false, ship: null });
       }
       board.push(row);
     }
     return board;
+  };
+
+  placeShip = (ship, position, direction) => {
+    this.ships.push(ship);
+    for (let i = 0; i < ship.length; i++) {
+      console.log(position);
+      this.board[position[0]][position[1]].ship = ship;
+      position.map((index, n) => (n += direction[index]));
+      position[0] += direction[0];
+      position[1] += direction[1];
+    }
   };
 }
 
