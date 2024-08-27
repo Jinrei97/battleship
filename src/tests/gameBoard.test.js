@@ -2,7 +2,7 @@ const GameBoard = require("../gameBoard");
 const Ship = require("../ship");
 
 const gameBoard = new GameBoard();
-afterEach(() => (gameBoard.board = gameBoard.setupBoard()));
+//afterEach(() => (gameBoard.board = gameBoard.setupBoard()));
 
 it("boardSize", () => {
   expect([gameBoard.board.length, gameBoard.board[0].length]).toEqual([10, 10]);
@@ -21,4 +21,18 @@ it("ship positioning", () => {
     gameBoard.board[4][4].ship,
     gameBoard.board[5][4].ship,
   ]).toEqual([ship, ship, ship]);
+});
+
+it("attackMiss", () => {
+  gameBoard.receiveAttack([0, 0]);
+  expect(gameBoard.board[0][0].hit).toBe(false);
+});
+it("attackHit", () => {
+  gameBoard.receiveAttack([3, 4]);
+  expect(gameBoard.board[3][4].hit).toBe(true);
+});
+it("history", () => {
+  expect(gameBoard.history.length).toBe(1);
+  gameBoard.receiveAttack([8, 7]);
+  expect(gameBoard.history.length).toEqual(2);
 });
