@@ -11,7 +11,8 @@ class DOMController {
     });
   };
 
-  createBoard = (board) => {
+  createBoard = (player, playerNum = 1) => {
+    const board = player.gameBoard.board;
     const divBoard = [];
     for (let i = 0; i < board.length; i++) {
       const row = document.createElement("div");
@@ -23,19 +24,25 @@ class DOMController {
         if (board[i][j].hit && !board[i][j].ship)
           square.classList.toggle("miss");
         if (board[i][j].ship) square.classList.toggle("ship");
+        square.addEventListener("click", () => {
+          player.gameBoard.receiveAttack([i, j]);
+          this.renderBoard(player, playerNum);
+        });
         row.appendChild(square);
       }
       divBoard.push(row);
     }
     return divBoard;
   };
-  renderBoard = (player_1, player_2) => {
-    const player_1_board = this.createBoard(player_1.gameBoard.board);
-    const player_2_board = this.createBoard(player_2.gameBoard.board);
-    this.board_1.replaceChildren();
-    this.board_2.replaceChildren();
-    player_1_board.map((row) => this.board_1.appendChild(row));
-    player_2_board.map((row) => this.board_2.appendChild(row));
+  renderBoard = (player, playerNum = 1) => {
+    const playerBoard = this.createBoard(player, playerNum);
+    if (playerNum === 1) {
+      this.board_1.replaceChildren();
+      playerBoard.map((row) => this.board_1.appendChild(row));
+    } else {
+      this.board_2.replaceChildren();
+      playerBoard.map((row) => this.board_2.appendChild(row));
+    }
   };
 }
 

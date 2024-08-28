@@ -41,11 +41,11 @@ body {
                          background-size: contain;
                          background-repeat: no-repeat;
                     }
-                    .hit {
-                         background-image: url("./images/hit.jpg");
-                    }
                     .ship {
                          background-image: url("./images/ship.jpg");
+                    }
+                    .hit {
+                         background-image: url("./images/hit.jpg");
                     }
                     .miss {
                          background-image: url("./images/miss.jpg");
