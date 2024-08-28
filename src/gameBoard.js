@@ -38,8 +38,8 @@ class GameBoard {
     const [x, y] = position;
     let area = this.board[x][y];
     if (!area.hit) {
+      area.hit = true;
       if (area.ship) {
-        area.hit = true;
         area.ship.hit();
         this.checkVictory();
       } else {
