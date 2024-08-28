@@ -9,11 +9,21 @@ body {
         width: 150px;
         height: 50px;
    } 
-   textarea {
-     height: 100px;
-     width: 70vw;
+   .instructions {
+     display: flex;
+     flex-direction: column;
      justify-self: center;
+     align-items: center;
+     gap: 1rem;
    }
+     .instructions > div {
+          justify-self: center;
+     }
+     textarea {
+          height: 100px;
+          width: 70vw;
+     }
+
    .gameArea {
         display:flex;
         justify-content: space-around;

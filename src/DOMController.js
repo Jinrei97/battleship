@@ -1,9 +1,10 @@
 class DOMController {
-  constructor() {
+  constructor(game) {
     this.board_1 = document.querySelector(".board_1");
     this.board_2 = document.querySelector(".board_2");
     this.newGameBtn = document.querySelector(".newGameBtn");
     this.messageBoard = document.querySelector("textarea");
+    this.game = game;
     console.log(this);
   }
   setupNewGameBtn = (callback) => {
@@ -42,11 +43,16 @@ class DOMController {
     const [i, j] = [...square.classList[1]].map((val) => Number(val));
     const board = player.gameBoard.board;
     square.addEventListener("click", () => {
-      if (!board[i][j].hit && !player.gameBoard.searchHistory([i, j])) {
+      if (
+        !board[i][j].hit &&
+        !player.gameBoard.searchHistory([i, j]) &&
+        player.number === this.game.currentPlayer
+      ) {
         player.gameBoard.receiveAttack([i, j]);
         if (board[i][j].hit && board[i][j].ship) square.classList.toggle("hit");
         if (board[i][j].hit && !board[i][j].ship)
           square.classList.toggle("miss");
+        this.game.changeTurn();
       }
     });
   };
