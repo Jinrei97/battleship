@@ -3,12 +3,16 @@ class DOMController {
     this.board_1 = document.querySelector(".board_1");
     this.board_2 = document.querySelector(".board_2");
     this.newGameBtn = document.querySelector(".newGameBtn");
+    this.messageBoard = document.querySelector("textarea");
     console.log(this);
   }
   setupNewGameBtn = (callback) => {
     this.newGameBtn.addEventListener("click", () => {
       callback();
     });
+  };
+  message = (msg) => {
+    this.messageBoard.textContent = msg;
   };
 
   createBoard = (player, playerNum = 1) => {
@@ -19,11 +23,12 @@ class DOMController {
       row.classList.toggle("row");
       for (let j = 0; j < board[0].length; j++) {
         const square = document.createElement("div");
-        square.classList.toggle("square");
+        square.classList = `square ${i}${j}`;
         if (board[i][j].hit && board[i][j].ship) square.classList.toggle("hit");
         if (board[i][j].hit && !board[i][j].ship)
           square.classList.toggle("miss");
         if (board[i][j].ship) square.classList.toggle("ship");
+        // square event
         square.addEventListener("click", () => {
           player.gameBoard.receiveAttack([i, j]);
           this.renderBoard(player, playerNum);

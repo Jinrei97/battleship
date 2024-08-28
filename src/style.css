@@ -1,13 +1,19 @@
 body {
     display: grid;
-    grid-template-rows: 100px 1fr;
-    height: 100vh
+    grid-template-rows: 100px, 100px, 1fr;
+    height: 100vh;
+    overflow: hidden;
 }
    .newGameBtn {
         justify-self: center;
         width: 150px;
         height: 50px;
    } 
+   textarea {
+     height: 100px;
+     width: 70vw;
+     justify-self: center;
+   }
    .gameArea {
         display:flex;
         justify-content: space-around;
