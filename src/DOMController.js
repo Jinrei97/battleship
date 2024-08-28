@@ -10,6 +10,7 @@ class DOMController {
       callback();
     });
   };
+
   createBoard = (board) => {
     const divBoard = [];
     for (let i = 0; i < board.length; i++) {
@@ -18,7 +19,9 @@ class DOMController {
       for (let j = 0; j < board[0].length; j++) {
         const square = document.createElement("div");
         square.classList.toggle("square");
-        if (board[i][j].hit) square.classList.toggle("hit");
+        if (board[i][j].hit && board[i][j].ship) square.classList.toggle("hit");
+        if (board[i][j].hit && !board[i][j].ship)
+          square.classList.toggle("miss");
         if (board[i][j].ship) square.classList.toggle("ship");
         row.appendChild(square);
       }

@@ -36,4 +36,17 @@ body {
                          aspect-ratio: 1/1;
                          flex:1
                     }
-        
+                    .square {
+                         background-position: center;
+                         background-size: contain;
+                         background-repeat: no-repeat;
+                    }
+                    .hit {
+                         background-image: url("./images/hit.jpg");
+                    }
+                    .ship {
+                         background-image: url("./images/ship.jpg");
+                    }
+                    .miss {
+                         background-image: url("./images/miss.jpg");
+                    }

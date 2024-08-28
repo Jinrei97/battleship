@@ -9,7 +9,7 @@ class Game {
     this.player_2 = new Player();
     this.display = new DOMController();
     this.display.setupNewGameBtn(this.setupNewGame);
-    this.display.renderBoard(this.player_1, this.player_2);
+    this.setupNewGame();
   }
   setupNewGame = () => {
     this.player_1 = new Player();
