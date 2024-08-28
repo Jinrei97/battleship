@@ -24,30 +24,31 @@ class DOMController {
       for (let j = 0; j < board[0].length; j++) {
         const square = document.createElement("div");
         square.classList = `square ${i}${j}`;
-        if (board[i][j].hit && board[i][j].ship) square.classList.toggle("hit");
-        if (board[i][j].hit && !board[i][j].ship)
-          square.classList.toggle("miss");
         if (board[i][j].ship) square.classList.toggle("ship");
-        // square event
-        square.addEventListener("click", () => {
-          player.gameBoard.receiveAttack([i, j]);
-          this.renderBoard(player, playerNum);
-        });
+        this.setupSquare(square, player, playerNum);
         row.appendChild(square);
       }
       divBoard.push(row);
     }
-    return divBoard;
-  };
-  renderBoard = (player, playerNum = 1) => {
-    const playerBoard = this.createBoard(player, playerNum);
     if (playerNum === 1) {
       this.board_1.replaceChildren();
-      playerBoard.map((row) => this.board_1.appendChild(row));
+      divBoard.map((row) => this.board_1.appendChild(row));
     } else {
       this.board_2.replaceChildren();
-      playerBoard.map((row) => this.board_2.appendChild(row));
+      divBoard.map((row) => this.board_2.appendChild(row));
     }
+  };
+  setupSquare = (square, player) => {
+    const [i, j] = [...square.classList[1]].map((val) => Number(val));
+    const board = player.gameBoard.board;
+    square.addEventListener("click", () => {
+      if (!board[i][j].hit && !player.gameBoard.searchHistory([i, j])) {
+        player.gameBoard.receiveAttack([i, j]);
+        if (board[i][j].hit && board[i][j].ship) square.classList.toggle("hit");
+        if (board[i][j].hit && !board[i][j].ship)
+          square.classList.toggle("miss");
+      }
+    });
   };
 }
 

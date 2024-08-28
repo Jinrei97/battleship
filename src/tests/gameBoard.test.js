@@ -27,7 +27,7 @@ it("ship positioning", () => {
 
 it("attackMiss", () => {
   gameBoard.receiveAttack([0, 0]);
-  expect(gameBoard.board[0][0].hit).toBe(false);
+  expect(gameBoard.board[1][0].hit).toBe(false);
 });
 it("attackHit", () => {
   const ship = new Ship(3);
@@ -50,4 +50,10 @@ it("victory check", () => {
   gameBoard.receiveAttack([4, 4]);
   gameBoard.receiveAttack([5, 4]);
   expect(gameBoard.checkVictory()).toBe(true);
+});
+
+it("historySearch", () => {
+  gameBoard.receiveAttack([8, 7]);
+  expect(gameBoard.searchHistory([0, 0])).toBe(undefined);
+  expect(gameBoard.searchHistory([8, 7])).toBe("87");
 });

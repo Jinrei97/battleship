@@ -24,6 +24,11 @@ class GameBoard {
     return board;
   };
 
+  searchHistory = (position) => {
+    const key = `${position[0]}${position[1]}`;
+    return this.history.find((val) => val === key);
+  };
+
   placeShip = (ship, position, direction) => {
     this.ships.push(ship);
     for (let i = 0; i < ship.length; i++) {
@@ -43,7 +48,7 @@ class GameBoard {
         area.ship.hit();
         this.checkVictory();
       } else {
-        this.history.push(position);
+        this.history.push(`${x}${y}`);
       }
     }
   };

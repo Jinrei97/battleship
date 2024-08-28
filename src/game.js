@@ -20,8 +20,8 @@ class Game {
     this.player_1.gameBoard.placeShip(new Ship(3), [0, 1], [0, 1]);
     this.player_2.gameBoard.placeShip(new Ship(3), [4, 4], [1, 0]);
     this.player_2.gameBoard.placeShip(new Ship(3), [0, 1], [0, 1]);
-    this.display.renderBoard(this.player_1);
-    this.display.renderBoard(this.player_2, 2);
+    this.display.createBoard(this.player_1);
+    this.display.createBoard(this.player_2, 2);
   };
   changeTurn = () => {
     this.display.message("Current player: player " + this.currentPlayer);
