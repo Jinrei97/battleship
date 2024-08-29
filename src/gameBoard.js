@@ -47,9 +47,8 @@ class GameBoard {
       if (area.ship) {
         area.ship.hit();
         this.checkVictory();
-      } else {
-        this.history.push(`${x}${y}`);
       }
+      this.history.push(`${x}${y}`);
     }
   };
   checkVictory = () => {

@@ -46,7 +46,7 @@ class DOMController {
       if (
         !board[i][j].hit &&
         !player.gameBoard.searchHistory([i, j]) &&
-        player.number === this.game.currentPlayer
+        player === this.game.currentPlayer
       ) {
         player.gameBoard.receiveAttack([i, j]);
         if (board[i][j].hit && board[i][j].ship) square.classList.toggle("hit");
@@ -55,6 +55,11 @@ class DOMController {
         this.game.changeTurn();
       }
     });
+  };
+  getSquare = (num, move) => {
+    const board = num === 1 ? this.board_1 : this.board_2;
+    const square = board.getElementsByClassName(`${move[0]}${move[1]}`);
+    return square[0];
   };
 }
 
