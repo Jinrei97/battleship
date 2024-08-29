@@ -12,8 +12,7 @@ class Game {
     this.nextPlayer = this.currentNum === 1 ? this.player_2 : this.player_1;
     this.display = new DOMController(this);
     this.display.setupNewGameBtn(this.setupNewGame);
-    this.setupNewGame();
-    this.changeTurn();
+    this.display.newGameBtn.click();
   }
 
   setupNewGame = () => {
@@ -23,8 +22,9 @@ class Game {
     this.player_1.gameBoard.placeShip(new Ship(5), [0, 1], [0, 1]);
     this.player_2.gameBoard.placeShip(new Ship(5), [4, 4], [1, 0]);
     this.player_2.gameBoard.placeShip(new Ship(3), [0, 1], [0, 1]);
-    this.display.createBoard(this.player_1);
-    this.display.createBoard(this.player_2, 2);
+    this.display.createBoard(this.player_1, 2);
+    this.display.createBoard(this.player_2);
+    this.changeTurn();
   };
   changeTurn = () => {
     this.display.message("Current player: player " + this.currentNum);
@@ -34,9 +34,9 @@ class Game {
     console.log("num: ", this.currentNum);
     console.log("cPlayer: ", this.currentPlayer);
     console.log("nPlayer: ", this.nextPlayer);
-    if (this.currentPlayer.type === "cpu") {
-      const move = this.cpuMove(this.currentPlayer);
-      const square = this.display.getSquare(this.currentNum, move);
+    if (this.nextPlayer.type === "cpu") {
+      const move = this.cpuMove(this.nextPlayer);
+      const square = this.display.getSquare(this.nextPlayer, move);
       console.log("move: ", move);
       console.log("square: ", square);
       square.click();
