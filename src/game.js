@@ -28,6 +28,14 @@ class Game {
     this.display.message("Current player: player " + this.currentPlayer);
     this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;
   };
+  cpuMove = (player) => {
+    const getCoord = Math.floor(Math.random() * 8);
+    let move = [getCoord(), getCoord()];
+    while (player.gameBoard.searchHistory(move)) {
+      move = [getCoord(), getCoord()];
+    }
+    return move;
+  };
 }
 
 const game = new Game();
