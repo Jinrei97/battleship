@@ -56,8 +56,8 @@ class DOMController {
       }
     });
   };
-  getSquare = (num, move) => {
-    const board = num === 1 ? this.board_1 : this.board_2;
+  getSquare = (player, move) => {
+    const board = player.number === 1 ? this.board_1 : this.board_2;
     const square = board.getElementsByClassName(`${move[0]}${move[1]}`);
     return square[0];
   };
